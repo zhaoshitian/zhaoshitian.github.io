@@ -168,11 +168,33 @@
             font-size: 0.95rem;
         }
 
+        .lexart-image-container {
+            text-align: center;
+            margin: 40px 0;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        
+        .lexart-image-container:hover {
+            transform: translateY(-5px);
+        }
+        
+        .lexart-image-container img {
+            max-width: 40%;
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+        }
+        
+        .lexart-image-container:hover img {
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
         .lexart-image-container p {
             font-style: italic;
             margin-top: 15px;
             color: #6b7280;
-            max-width: 30%;
+            max-width: 80%;
             margin-left: auto;
             margin-right: auto;
             font-size: 0.95rem;
