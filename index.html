@@ -10,6 +10,76 @@
     <link rel="shortcut icon" href="images/favicon/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
     
+    <!-- 新增的用于实现Tab切换的样式 -->
+    <style>
+      .tab-container {
+        display: flex;
+        gap: 20px;
+        border-bottom: 1px solid #ddd;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+      }
+
+      .tab-btn {
+        background: none;
+        border: none;
+        font-size: 18px;
+        font-weight: bold;
+        color: #555;
+        cursor: pointer;
+        padding: 5px 10px;
+        transition: all 0.3s ease;
+        font-family: sans-serif; /* 保持字体一致 */
+      }
+
+      .tab-btn:hover {
+        color: #000;
+      }
+
+      .tab-btn.active {
+        color: #d94d2e; /* 选中颜色，可根据喜好修改 */
+        border-bottom: 3px solid #d94d2e;
+      }
+
+      /* 隐藏元素的类 */
+      .hidden-section {
+        display: none;
+      }
+    </style>
+    
+    <!-- 脚本逻辑 -->
+    <script>
+      function switchTab(tabName) {
+        // 1. 获取所有 tbody 元素
+        const highlightBody = document.getElementById('pubs-highlight');
+        const otherBody = document.getElementById('pubs-other');
+        const blogBody = document.getElementById('pubs-blogs');
+
+        // 2. 获取所有按钮并移除 active 样式
+        const buttons = document.querySelectorAll('.tab-btn');
+        buttons.forEach(btn => btn.classList.remove('active'));
+
+        // 3. 根据点击的 tabName 设置显示/隐藏逻辑
+        if (tabName === 'highlight') {
+          highlightBody.style.display = '';
+          otherBody.style.display = 'none';
+          blogBody.style.display = 'none';
+          buttons[0].classList.add('active'); // 高亮第一个按钮
+        } 
+        else if (tabName === 'all') {
+          highlightBody.style.display = '';
+          otherBody.style.display = ''; // 显示其他论文
+          blogBody.style.display = 'none';
+          buttons[1].classList.add('active'); // 高亮第二个按钮
+        } 
+        else if (tabName === 'blog') {
+          highlightBody.style.display = 'none';
+          otherBody.style.display = 'none';
+          blogBody.style.display = '';
+          buttons[2].classList.add('active'); // 高亮第三个按钮
+        }
+      }
+    </script>
   </head>
 
   <body>
@@ -22,24 +92,19 @@
                 <p class="name" style="text-align: center;">
                   Shitian Zhao (赵世天)
                 </p>
-		<p>Now I am a research intern in Shanghai AI Lab, in my gap year, mentored by <a href="https://kpzhang93.github.io/">Kaipeng Zhang</a>. Also, I work closely with <a href="https://weichen582.github.io/">Professor Chen Wei</a>.
-		<br>
-		I got my bachelor degree in the summer of 2024 from <a href="https://english.ecnu.edu.cn/">East China Normal University</a>, supervised by Professor <a href="https://wangyan921.github.io/">Yan Wang</a>. And I was an intern in <a href="https://ccvl.jhu.edu/">CCVL</a>@Johns Hopkins University, supervised by <a href="https://www.cs.jhu.edu/~ayuille/">Bloomberg Distinguished Professor Alan Yuille</a> and <a href="https://lizw14.github.io/">Zhuowan Li</a>.
+        <p>Now I am a research intern in Shanghai AI Lab, in my gap year, mentored by <a href="https://kpzhang93.github.io/">Kaipeng Zhang</a>. Also, I work closely with <a href="https://weichen582.github.io/">Professor Chen Wei</a>.
+        <br>
+        I got my bachelor degree in the summer of 2024 from <a href="https://english.ecnu.edu.cn/">East China Normal University</a>, supervised by Professor <a href="https://wangyan921.github.io/">Yan Wang</a>. And I was an intern in <a href="https://ccvl.jhu.edu/">CCVL</a>@Johns Hopkins University, supervised by <a href="https://www.cs.jhu.edu/~ayuille/">Bloomberg Distinguished Professor Alan Yuille</a> and <a href="https://lizw14.github.io/">Zhuowan Li</a>.
                 </p>
-		<p>Email: zhaosh5t5an@gmail.com
-		</p>
-		<!-- <p>Wechat: zstt0135
-		</p> -->
+        <p>Email: zhaosh5t5an@gmail.com
+        </p>
                 <p style="text-align:center">
-<!--                   <a href="mailto:zhaosh5t5an@gmail.com">Email</a> &nbsp;/&nbsp; -->
                   <a href="https://drive.google.com/file/d/1MSwfJI-ljTeKYOmjzeOqkjf39alfou0o/view?usp=sharing">CV</a> &nbsp;/&nbsp;
                   <a href="https://scholar.google.com/citations?user=84t2PkoAAAAJ&hl=en">G-Scholar</a> &nbsp;/&nbsp;
                   <a href="https://twitter.com/zst96687522">Twitter</a> &nbsp;/&nbsp;
-		  <a href="https://www.linkedin.com/in/%E4%B8%96%E5%A4%A9-%E8%B5%B5-6481b4213/">LinkedIn</a> &nbsp;/&nbsp;
+          <a href="https://www.linkedin.com/in/%E4%B8%96%E5%A4%A9-%E8%B5%B5-6481b4213/">LinkedIn</a> &nbsp;/&nbsp;
                   <a href="https://github.com/zhaoshitian/">Github</a> &nbsp;/&nbsp;
-<!-- 		  <a href="https://hub.docker.com/u/zhaoshitian">Dockerhub</a> &nbsp;/&nbsp; -->
-		  <a href="https://huggingface.co/stzhao">HuggingFace</a>
-		  <!-- <a href="https://www.zhihu.com/people/bie-lai-wu-yang-39-60">Zhihu(知乎)</a> -->
+          <a href="https://huggingface.co/stzhao">HuggingFace</a>
                 </p>
               </td>
               <td style="padding:0%;width:100%;max-width:100%">
@@ -51,8 +116,8 @@
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
           <tr>
               <td style="padding:10px;width:100%;vertical-align:middle">
-	        <p>"A central problem in machine learning involves modeling complex data-sets using highly flexible families of probability distributions in which learning, sampling, inference, and evaluation are still analytically or computationally tractable."</p>
-	        <p>--- 《Deep Unsupervised Learning using Nonequilibrium Thermodynamics》</p>
+            <p>"A central problem in machine learning involves modeling complex data-sets using highly flexible families of probability distributions in which learning, sampling, inference, and evaluation are still analytically or computationally tractable."</p>
+            <p>--- 《Deep Unsupervised Learning using Nonequilibrium Thermodynamics》</p>
               </td>
           </tr>
       </tbody></table>
@@ -61,408 +126,352 @@
           <tr>
               <td style="padding:10px;width:100%;vertical-align:middle">
                   <p>
-                    <!-- <span style="background-color: #FFFF00"> -->
                     <font color="orange"><strong>Application</strong></font>: I am currently in the process of applying for a PhD program in Artificial Intelligence for 2026fall. If you are also applying or are interested in talking about research, please do not hesitate to contact me! I am more than happy to connect and share insights.</p>
               </td>
           </tr>
       </tbody></table>
-		
+        
           <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
               <tr>
               <td style="padding:20px;width:100%;vertical-align:middle">
                 <h2>Research</h2>
-		<p>
-		My Long-Term Research Interests include:
-		</p>
-		<ul>
-		  <li><strong>Multi-modality Generative Models</strong>: Modeling multi-modal content in the generative way, under various paradigms, e.g., autoregressive model, diffusion model, etc.<br><a href="https://arxiv.org/abs/2408.02657">Lumina-mGPT</a>, <a href="https://arxiv.org/abs/2402.05935">SPHINX-X</a></li>
-		  <li><strong>General Instructable Agent</strong>: AI agents that can perceive and understand a variety of environments, then take actions to achieve an instructed goal.<br><a href="https://arxiv.org/abs/2312.06685">Causal-CoG</a>, <a href="https://arxiv.org/abs/2410.00363">Likelihood Composition</a>, <a href="https://arxiv.org/pdf/2507.07998">PyVision</a></li>
-		  <!-- <li><strong>AI4Art</strong>: AI for Art, Media, and Entertainment.<a href="https://arxiv.org/abs/2503.21749">LeX-Art</a>, <a href="https://huggingface.co/X-ART">X-ART</a></li> -->
-		</ul>
-<!--                 <p>
-                  My interest lies on generative models, with a particular focus on multi-modal language models and diffusion models. I find it more compelling to consider large language models (LLMs) and latent diffusion models (LDMs) from the perspective of energy-based models (EBMs). The essence of generative modeling is to capture the underlying distribution or rules of our world. As such, the inherent knowledge embedded within these models serves as an excellent foundation for downstream tasks.
-                </p> -->
+        <p>
+        My Long-Term Research Interests include:
+        </p>
+        <ul>
+          <li><strong>Multi-modality Generative Models</strong>: Modeling multi-modal content in the generative way, under various paradigms, e.g., autoregressive model, diffusion model, etc.<br><a href="https://arxiv.org/abs/2408.02657">Lumina-mGPT</a>, <a href="https://arxiv.org/abs/2402.05935">SPHINX-X</a></li>
+          <li><strong>General Instructable Agent</strong>: AI agents that can perceive and understand a variety of environments, then take actions to achieve an instructed goal.<br><a href="https://arxiv.org/abs/2312.06685">Causal-CoG</a>, <a href="https://arxiv.org/abs/2410.00363">Likelihood Composition</a>, <a href="https://arxiv.org/pdf/2507.07998">PyVision</a></li>
+        </ul>
               </td>
             </tr>
           </tbody></table>
+          
           <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-
-
-
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
             <tr>
             <td style="padding:20px;width:100%;vertical-align:middle">
               <h2>News</h2>
-              <!-- <p>
-                  <li><span style="background-color: #FFFF00"> New </span><font color="orange"><strong>On the job market</strong></font>: I am currently on the job market. I am interested in both industry and academic positions. Don’t hesitate to email me if there is a potential fit.</p> -->
               <ul>
-		<li><strong>[Oct. 2025]</strong> PyVision is received as Poster by MTI-LLM Workshop@NeurIPS 2025.</li>
-		<li><strong>[March. 2025]</strong> We released LeX-Art, a framework for aesthetic, high fidelity text image generation. Data, code, model, benchmark have been open-sourced.</li>
-		<li><strong>[Sept. 2024]</strong> Likelihood Composition is accepted by EMNLP 2024 as findings.</li>
-		<li><strong>[May 2024]</strong> Give a talk of Causal-CoG at CCVL@JHU's group meeting.</li>
+        <li><strong>[Oct. 2025]</strong> PyVision is received as Poster by MTI-LLM Workshop@NeurIPS 2025.</li>
+        <li><strong>[March. 2025]</strong> We released LeX-Art, a framework for aesthetic, high fidelity text image generation. Data, code, model, benchmark have been open-sourced.</li>
+        <li><strong>[Sept. 2024]</strong> Likelihood Composition is accepted by EMNLP 2024 as findings.</li>
+        <li><strong>[May 2024]</strong> Give a talk of Causal-CoG at CCVL@JHU's group meeting.</li>
                 <li><strong>[April 2024]</strong> Causal-CoG is accepted by CVPR 2024 as Poster (Highlight, top 2.8%).</li>
-		<li><strong>[Dec. 2023]</strong> Join Shanghai AI Lab as a research intern.</li>
+        <li><strong>[Dec. 2023]</strong> Join Shanghai AI Lab as a research intern.</li>
               </ul>
-<!--                 <p style="text-align:right;font-size:small;">
-                  Last updated: 2024/9/26.
-                </p> -->
             </td>
           </tr>
         </tbody></table>
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
         
         <hr>
+        
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
             <tr>
             <td style="padding:20px;width:100%;vertical-align:middle">
-              <h2>Publications</h2>
+              <!-- 原来的标题改为 Tab 按钮 -->
+              <div class="tab-container">
+                <button class="tab-btn active" onclick="switchTab('highlight')">Highlight Publications</button>
+                <button class="tab-btn" onclick="switchTab('all')">All Publications</button>
+                <button class="tab-btn" onclick="switchTab('blog')">Blogs</button>
+              </div>
             </td>
           </tr>
         </tbody></table>
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
 
-    <!-- <tr bgcolor="#ffffd0"> -->
+        <!-- 这里开始是Publication列表，我们使用多个 tbody 来分组 -->
+        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+          
+          <!-- 1. Highlight Papers (默认显示) -->
+          <tbody id="pubs-highlight">
+            <tr>
+              <td style="padding:20px;width:35%;vertical-align:middle">
+                  <img src='images/pyvision.jpeg' width="250">
+              </td>
+              <td style="padding:20px;width:65%;vertical-align:middle">
+                <a href="https://arxiv.org/abs/2503.21749">
+                  <papertitle>PyVision: Agentic Vision with Dynamic Tooling</papertitle>
+                </a>
+                <br>
+                <strong>Shitian Zhao*</strong>,
+                <a>Haoquan Zhang*</a>,
+                <a>Shaoheng Lin*</a>,
+                <a>Ming Li*</a>,
+                <a>Qilong Wu*</a>,
+                <a>Kaipeng Zhang</a>,
+                <a>Chen Wei</a>,
+                <br>
+                <em>MTI-LLM@NeurIPS</em>, 2025
+                <br> 
+                <a href="https://arxiv.org/pdf/2507.07998">arXiv</a> /
+                <a href="https://github.com/agents-x-project/PyVision">code</a> /
+                <a href="https://agent-x.space/pyvision/">project page</a> /
+                <a href="https://huggingface.co/spaces/Agents-X/PyVision">Online Demo</a>
+                <p></p>
+              </td>
+            </tr>
 
-    <tr>
-      <td style="padding:20px;width:35%;vertical-align:middle">
-          <img src='images/pyvision.jpeg' width="250">
-      </td>
-      <td style="padding:20px;width:65%;vertical-align:middle">
-        <a href="https://arxiv.org/abs/2503.21749">
-          <papertitle>PyVision: Agentic Vision with Dynamic Tooling</papertitle>
-        </a>
-        <br>
-        <strong>Shitian Zhao*</strong>,
-        <a>Haoquan Zhang*</a>,
-        <a>Shaoheng Lin*</a>,
-        <a>Ming Li*</a>,
-	<a>Qilong Wu*</a>,
-	<a>Kaipeng Zhang</a>,
-	<a>Chen Wei</a>,
-        <br>
-        <em>MTI-LLM@NeurIPS</em>, 2025
-        <br> 
-        <a href="https://arxiv.org/pdf/2507.07998">arXiv</a> /
-        <a href="https://github.com/agents-x-project/PyVision">code</a> /
-	<a href="https://agent-x.space/pyvision/">project page</a> /
-	<a href="https://huggingface.co/spaces/Agents-X/PyVision">Online Demo</a>
-        <p></p>
-      </td>
-    </tr>
+            <tr>
+              <td style="padding:20px;width:35%;vertical-align:middle">
+                  <img src='images/Causal_CoG.png' width="250">
+              </td>
+              <td style="padding:20px;width:65%;vertical-align:middle">
+                <a href="https://arxiv.org/abs/2312.06685">
+                  <papertitle>Causal-CoG: A Causal-Effect Look at Context Generation for Boosting Multi-modal Language Models</papertitle>
+                </a>
+                <br>
+                <strong>Shitian Zhao</strong>,
+                <a href="https://lizw14.github.io/">Zhuowan Li</a>,
+                <a>Yadong Lu</a>,
+                <a href="https://cs.jhu.edu/~ayuille/">Alan Yuille</a>,
+                <a href="https://wangyan921.github.io/">Yan Wang</a>
+                <br>
+                <em>CVPR (Poster Highlight, top 2.8%)</em>, 2024
+                <br>       
+                <a href="https://arxiv.org/abs/2312.06685">arXiv</a> /
+                <a href="https://github.com/zhaoshitian/Causal-CoG">code</a>
+                <p></p>
+              </td>
+            </tr>
 
-    <tr>
-      <td style="padding:20px;width:35%;vertical-align:middle">
-          <img src='images/Causal_CoG.png' width="250">
-      </td>
-      <td style="padding:20px;width:65%;vertical-align:middle">
-        <a href="https://arxiv.org/abs/2312.06685">
-          <papertitle>Causal-CoG: A Causal-Effect Look at Context Generation for Boosting Multi-modal Language Models</papertitle>
-        </a>
-        <br>
-        <strong>Shitian Zhao</strong>,
-        <a href="https://lizw14.github.io/">Zhuowan Li</a>,
-        <a>Yadong Lu</a>,
-        <a href="https://cs.jhu.edu/~ayuille/">Alan Yuille</a>,
-	<a href="https://wangyan921.github.io/">Yan Wang</a>
-        <br>
-        <em>CVPR (Poster Highlight, top 2.8%)</em>, 2024
-        <br>       
-        <a href="https://arxiv.org/abs/2312.06685">arXiv</a> /
-        <a href="https://github.com/zhaoshitian/Causal-CoG">code</a>
-        <p></p>
-      </td>
-    </tr>
+            <tr>
+              <td style="padding:20px;width:35%;vertical-align:middle">
+                  <img src='images/teaser.jpeg' width="250">
+              </td>
+              <td style="padding:20px;width:65%;vertical-align:middle">
+                <a href="https://arxiv.org/abs/2503.21749">
+                  <papertitle>LeX-Art: Rethinking Text Generation via Scalable High-Quality Data Synthesis</papertitle>
+                </a>
+                <br>
+                <strong>Shitian Zhao*</strong>,
+                <a>Qilong Wu*</a>,
+                <a>Xinyue Li*</a>,
+                <a>Bo Zhang</a>,
+                <a>Ming Li</a>,
+                <a>Qi Qin</a>,
+                <a>Dongyang Liu</a>,
+                <a>Kaipeng Zhang</a>,
+                <a>Hongsheng Li</a>,
+                <a>Yu Qiao</a>,
+                <a>Peng Gao</a>,
+                <a>Bin Fu</a>,
+                <a>Zhen Li</a>,
+                <br>
+                <em>Preprint</em>, 2025
+                <br> 
+                <a href="https://arxiv.org/abs/2503.21749">arXiv</a> /
+                <a href="https://github.com/zhaoshitian/LeX-Art">code</a> /
+                <a href="https://zhaoshitian.github.io/lexart/">project page</a> /
+                <a href="https://huggingface.co/X-ART">huggingface</a>
+                <p></p>
+              </td>
+            </tr>
 
-    <tr>
-      <td style="padding:20px;width:35%;vertical-align:middle">
-          <img src='images/like.jpeg' width="250">
-      </td>
-      <td style="padding:20px;width:65%;vertical-align:middle">
-        <a href="https://arxiv.org/abs/2312.06685">
-          <papertitle>Unleashing the Potentials of Likelihood Composition for Multi-modal Language Models</papertitle>
-        </a>
-        <br>
-        <strong>Shitian Zhao</strong>,
-        <a>Renrui Zhang</a>,
-        <a>Xu Luo</a>,
-        <a>Yan Wang</a>,
-	<a>Shanghang Zhang</a>,
-	<a>Peng Gao</a>
-        <br>
-        <em>EMNLP Findings</em>, 2024
-        <br> 
-        <a href="https://arxiv.org/abs/2410.00363">arXiv</a> /
-        <a href="https://github.com/zhaoshitian/Likelihood-Composition-Toolkit">code</a>
-        <p></p>
-      </td>
-    </tr>
+            <tr>
+              <td style="padding:20px;width:35%;vertical-align:middle">
+                  <img src='images/lumina_mgpt.png' width="250">
+              </td>
+              <td style="padding:20px;width:65%;vertical-align:middle">
+                <a href="https://arxiv.org/abs/2402.05935">
+                  <papertitle>Lumina-mGPT: Illuminate Flexible Photorealistic Text-to-Image Generation with Multimodal Generative Pretraining</papertitle>
+                </a>
+                <br>
+                <a>Dongyang Liu*</a>,
+                <strong>Shitian Zhao*</strong>,
+                <a>Le Zhuo*</a>,
+                <a>Weifeng Lin*</a>,
+                <a>Hongsheng Li</a>,
+                <a>Yu Qiao</a>,
+                <a>Peng Gao*</a>
+                <br>
+                Preprint
+                <br>
+                <a href="https://arxiv.org/abs/2408.02657">arXiv</a> /
+                <a href="https://github.com/Alpha-VLLM/Lumina-mGPT">code</a>
+                <p></p>
+              </td>
+            </tr>
+          </tbody>
 
+          <!-- 2. Other Papers (点击 All 时显示，Highlight时隐藏) -->
+          <!-- 默认加上 style="display:none;" -->
+          <tbody id="pubs-other" style="display:none;">
+            <tr>
+              <td style="padding:20px;width:35%;vertical-align:middle">
+                  <img src='images/like.jpeg' width="250">
+              </td>
+              <td style="padding:20px;width:65%;vertical-align:middle">
+                <a href="https://arxiv.org/abs/2312.06685">
+                  <papertitle>Unleashing the Potentials of Likelihood Composition for Multi-modal Language Models</papertitle>
+                </a>
+                <br>
+                <strong>Shitian Zhao</strong>,
+                <a>Renrui Zhang</a>,
+                <a>Xu Luo</a>,
+                <a>Yan Wang</a>,
+                <a>Shanghang Zhang</a>,
+                <a>Peng Gao</a>
+                <br>
+                <em>EMNLP Findings</em>, 2024
+                <br> 
+                <a href="https://arxiv.org/abs/2410.00363">arXiv</a> /
+                <a href="https://github.com/zhaoshitian/Likelihood-Composition-Toolkit">code</a>
+                <p></p>
+              </td>
+            </tr>
 
-    <tr>
-      <td style="padding:20px;width:35%;vertical-align:middle">
-          <img src='images/teaser.jpeg' width="250">
-      </td>
-      <td style="padding:20px;width:65%;vertical-align:middle">
-        <a href="https://arxiv.org/abs/2503.21749">
-          <papertitle>LeX-Art: Rethinking Text Generation via Scalable High-Quality Data Synthesis</papertitle>
-        </a>
-        <br>
-        <strong>Shitian Zhao*</strong>,
-        <a>Qilong Wu*</a>,
-        <a>Xinyue Li*</a>,
-        <a>Bo Zhang</a>,
-	<a>Ming Li</a>,
-	<a>Qi Qin</a>,
-	<a>Dongyang Liu</a>,
-	<a>Kaipeng Zhang</a>,
-	<a>Hongsheng Li</a>,
-	<a>Yu Qiao</a>,
-	<a>Peng Gao</a>,
-	<a>Bin Fu</a>,
-	<a>Zhen Li</a>,
-        <br>
-        <em>Preprint</em>, 2025
-        <br> 
-        <a href="https://arxiv.org/abs/2503.21749">arXiv</a> /
-        <a href="https://github.com/zhaoshitian/LeX-Art">code</a> /
-	<a href="https://zhaoshitian.github.io/lexart/">project page</a> /
-	<a href="https://huggingface.co/X-ART">huggingface</a>
-        <p></p>
-      </td>
-    </tr>
+            <tr>
+              <td style="padding:20px;width:35%;vertical-align:middle">
+                  <img src='images/PixWizard.jpeg' width="250">
+              </td>
+              <td style="padding:20px;width:65%;vertical-align:middle">
+                <a href="https://arxiv.org/abs/2409.15278">
+                  <papertitle>PixWizard: Versatile Image-to-Image Visual Assistant with Open-Language Instructions</papertitle>
+                </a>
+                <br>
+                <a>Weifeng Lin*</a>,
+                <a>Xinyu Wei*</a>,
+                <a>Renrui Zhang*</a>,
+                <a>Le Zhuo</a>,
+                <strong>Shitian Zhao</strong>,
+                <a>Siyuan Huang</a>,
+                <a>Junlin Xie</a>,
+                <a>Yu Qiao</a>,
+                <a>Peng Gao</a>,
+                <a>Hongsheng Li</a>
+                <br>
+                <em>ICLR</em>, 2025
+                <br>       
+                <a href="https://arxiv.org/abs/2409.15278">arXiv</a> /
+                <a href="https://github.com/AFeng-x/PixWizard">code</a>
+                <p></p>
+              </td>
+            </tr>
 
-    <tr>
-      <td style="padding:20px;width:35%;vertical-align:middle">
-          <img src='images/lumina_mgpt.png' width="250">
-      </td>
-      <td style="padding:20px;width:65%;vertical-align:middle">
-        <a href="https://arxiv.org/abs/2402.05935">
-          <papertitle>Lumina-mGPT: Illuminate Flexible Photorealistic Text-to-Image Generation with Multimodal Generative Pretraining</papertitle>
-        </a>
-        <br>
-        <a>Dongyang Liu*</a>,
-        <strong>Shitian Zhao*</strong>,
-        <a>Le Zhuo*</a>,
-        <a>Weifeng Lin*</a>,
-	<a>Hongsheng Li</a>,
-	<a>Yu Qiao</a>,
-	<a>Peng Gao*</a>
-        <br>
-        Preprint
-        <br>
-        <a href="https://arxiv.org/abs/2408.02657">arXiv</a> /
-        <a href="https://github.com/Alpha-VLLM/Lumina-mGPT">code</a>
-        <p></p>
-      </td>
-    </tr>
+            <tr>
+              <td style="padding:20px;width:35%;vertical-align:middle">
+                  <img src='images/sphinx_x.png' width="250">
+              </td>
+              <td style="padding:20px;width:65%;vertical-align:middle">
+                <a href="https://arxiv.org/abs/2402.05935">
+                  <papertitle>SPHINX-X: Scaling Data and Parameters for a Family of Multi-modal Large Language Models</papertitle>
+                </a>
+                <br>
+                <a>Dongyang Liu*</a>,
+                <a>Longtian Qiu*</a>,
+                <a>Siyuan Huang*</a>,
+                <a>Weifeng Lin*</a>,
+                <strong>Shitian Zhao</strong>,
+                <a>Shijie Geng</a>,
+                <a>Ziyi Lin</a>,
+                <a>Peng Jin</a>,
+                <a>Kaipeng Zhang</a>,
+                <a>Wenqi Shao</a>,
+                <a>Chao Xu</a>,
+                <a>Conghui He</a>,
+                <a>Junjun He</a>,
+                <a>Hao Shao</a>,
+                <a>Pan Lu</a>,
+                <a>Hongsheng Li</a>,
+                <a>Yu Qiao</a>,
+                <a>Peng Gao*</a>
+                <br>
+                <em>ICML</em>, 2024
+                <br>
+                <a href="https://arxiv.org/abs/2402.05935">arXiv</a> /
+                <a href="https://github.com/Alpha-VLLM/LLaMA2-Accessory">code</a>
+                <p></p>
+              </td>
+            </tr>
+          </tbody>
 
-    <tr>
-      <td style="padding:20px;width:35%;vertical-align:middle">
-          <img src='images/PixWizard.jpeg' width="250">
-      </td>
-      <td style="padding:20px;width:65%;vertical-align:middle">
-        <a href="https://arxiv.org/abs/2409.15278">
-          <papertitle>PixWizard: Versatile Image-to-Image Visual Assistant with Open-Language Instructions</papertitle>
-        </a>
-        <br>
-	<a>Weifeng Lin*</a>,
-	<a>Xinyu Wei*</a>,
-	<a>Renrui Zhang*</a>,
-	<a>Le Zhuo</a>,
-        <strong>Shitian Zhao</strong>,
-        <a>Siyuan Huang</a>,
-        <a>Junlin Xie</a>,
-        <a>Yu Qiao</a>,
-	<a>Peng Gao</a>,
-	<a>Hongsheng Li</a>
-        <br>
-        <em>ICLR</em>, 2025
-        <br>       
-        <a href="https://arxiv.org/abs/2409.15278">arXiv</a> /
-        <a href="https://github.com/AFeng-x/PixWizard">code</a>
-        <p></p>
-      </td>
-    </tr>
+          <!-- 3. Blogs (点击 Blogs 时显示，其他时隐藏) -->
+          <tbody id="pubs-blogs" style="display:none;">
+            <tr>
+              <td style="padding:20px;width:35%;vertical-align:middle">
+                  <!-- 示例Blog图片 -->
+                  <img src='images/favicon/favicon.ico' width="100" style="opacity:0.5"> 
+              </td>
+              <td style="padding:20px;width:65%;vertical-align:middle">
+                <a href="#">
+                  <papertitle>Coming Soon: My Thoughts on Generative Agents</papertitle>
+                </a>
+                <br>
+                <strong>Shitian Zhao</strong>
+                <br>
+                <em>Personal Blog</em>, 2025
+                <br>
+                <p>A deep dive into the future of agentic vision systems and how dynamic tooling changes the landscape of AI reasoning.</p>
+                <p></p>
+              </td>
+            </tr>
+          </tbody>
 
-
-    <tr>
-      <td style="padding:20px;width:35%;vertical-align:middle">
-          <img src='images/sphinx_x.png' width="250">
-      </td>
-      <td style="padding:20px;width:65%;vertical-align:middle">
-        <a href="https://arxiv.org/abs/2402.05935">
-          <papertitle>SPHINX-X: Scaling Data and Parameters for a Family of Multi-modal Large Language Models</papertitle>
-        </a>
-        <br>
-        <a>Dongyang Liu*</a>,
-        <a>Longtian Qiu*</a>,
-        <a>Siyuan Huang*</a>,
-        <a>Weifeng Lin*</a>,
-	<strong>Shitian Zhao</strong>,
-	<a>Shijie Geng</a>,
-	<a>Ziyi Lin</a>,
-	<a>Peng Jin</a>,
-	<a>Kaipeng Zhang</a>,
-	<a>Wenqi Shao</a>,
-	<a>Chao Xu</a>,
-	<a>Conghui He</a>,
-	<a>Junjun He</a>,
-	<a>Hao Shao</a>,
-	<a>Pan Lu</a>,
-	<a>Hongsheng Li</a>,
-	<a>Yu Qiao</a>,
-	<a>Peng Gao*</a>
-        <br>
-        <em>ICML</em>, 2024
-        <br>
-        <a href="https://arxiv.org/abs/2402.05935">arXiv</a> /
-        <a href="https://github.com/Alpha-VLLM/LLaMA2-Accessory">code</a>
-        <p></p>
-      </td>
-    </tr>
-
-
-<!--     <tr>
-      <td style="padding:20px;width:35%;vertical-align:middle">
-          <img src='images/sphinx_and_anubis.png' width="250">
-      </td>
-      <td style="padding:20px;width:65%;vertical-align:middle">
-        <a href="https://arxiv.org/abs/2312.06685">
-          <papertitle>SPHINX and ANUBIS: Alleviating Deterministic and Generative Hallucinations of Multi-modal Large Language Models</papertitle>
-        </a>
-        <br>
-        <strong>Shitian Zhao</strong>,
-        <a>Han Xiao</a>,
-        <a>Le Zhuo</a>,
-        <a>Xu Luo</a>,
-	<a>Hongsheng Li</a>,
-	<a>Yu Qiao</a>,
-	<a>Xiangyu Yue</a>,
-	<a>Peng Gao</a>
-        <br>
-        <em>Submitted</em>, 2024
-        <br>       
-        <p></p>
-      </td>
-    </tr> -->
-
-
-<!--     <tr>
-      <td style="padding:20px;width:35%;vertical-align:middle">
-          <img src='images/vqcoop.png' width="250">
-      </td>
-      <td style="padding:20px;width:65%;vertical-align:middle">
-        <a href="https://arxiv.org/abs/2312.06685">
-          <papertitle>CLIP with Vector-Quantized Prompts for Continual Learning</papertitle>
-        </a>
-        <br>
-        <strong>Shitian Zhao</strong>,
-        <a>Yadong Lu</a>,
-        <a>Xingran Xie</a>,
-        <a>Qingli Li</a>,
-	<a href="https://wangyan921.github.io/">Yan Wang</a>
-        <br>
-        <em>Submitted</em>, 2023
-        <br>       
-        <p></p>
-      </td>
-    </tr> -->
-
-<!--     <tr>
-      <td style="padding:20px;width:35%;vertical-align:middle">
-          <img src='images/causal_seg.png' width="250">
-      </td>
-      <td style="padding:20px;width:65%;vertical-align:middle">
-        <a href="https://arxiv.org/abs/2312.06685">
-          <papertitle>Prompting Universal Model for CT Image Segmentation from a Causal Perspective</papertitle>
-        </a>
-        <br>
-	<a>Boxiang Yun</a>,
-        <strong>Shitian Zhao</strong>,
-        <a>Qingli Li</a>,
-        <a>Alex Kot</a>,
-	<a href="https://wangyan921.github.io/">Yan Wang</a>
-        <br>
-        <em>Submitted</em>, 2024
-        <br>       
-        <p></p>
-      </td>
-    </tr> -->
-					
-					
-    </tbody></table>
+        </table>
 
         <hr>
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
             <tr>
             <td style="padding:20px;width:100%;vertical-align:middle">
               <h2>Professional Service</h2>
-		      <ul>
-			      <li>Reviewer at NeurIPS2024, CVPR2025.</li>
-		      </ul>
+              <ul>
+                  <li>Reviewer at NeurIPS2024, CVPR2025.</li>
+              </ul>
             </td>
           </tr>
         </tbody></table>
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-
+        
         <hr>
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
             <tr>
             <td style="padding:20px;width:100%;vertical-align:middle">
               <h2>Talks & Presentations</h2>
-		    <ul>
-		      <li><a href="https://docs.google.com/presentation/d/1XBtl9bWhFq1olp5QpK4Ka35ohQuhDP8nBQFbrOeUqyY/edit?usp=drive_link">Causal-CoG: A Causal-Effect Look at Context Generation for Boosting Multi-modal Language Models</a>, Group meeting @ CCVL, Johns Hopkins University</li>
-		      <li><a href="https://n8c4mpqf19.feishu.cn/slides/CySHsjM69l8rxfd1x1wcSAyWnch?from=from_copylink">Lumina-mGPT: Illuminate Flexible Photorealistic Text-to-Image Generation with Multimodal Generative Pretraining</a>, Group meeting @ CCVL, Johns Hopkins University</li>
-		    </ul>
+            <ul>
+              <li><a href="https://docs.google.com/presentation/d/1XBtl9bWhFq1olp5QpK4Ka35ohQuhDP8nBQFbrOeUqyY/edit?usp=drive_link">Causal-CoG: A Causal-Effect Look at Context Generation for Boosting Multi-modal Language Models</a>, Group meeting @ CCVL, Johns Hopkins University</li>
+              <li><a href="https://n8c4mpqf19.feishu.cn/slides/CySHsjM69l8rxfd1x1wcSAyWnch?from=from_copylink">Lumina-mGPT: Illuminate Flexible Photorealistic Text-to-Image Generation with Multimodal Generative Pretraining</a>, Group meeting @ CCVL, Johns Hopkins University</li>
+            </ul>
             </td>
           </tr>
         </tbody></table>
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-
+        
         <hr>
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
             <tr>
             <td style="padding:20px;width:100%;vertical-align:middle">
               <h2>Honors & Awards</h2>
-		      <ul>
-			      <li>Outstanding Graduate Thesis @ ECNU</li>
-			      <li>Excellent Student Scholarship (the first year in my undergraduate journey)</li>
-			      <li>The Third Prize, Province Level, China Undergraduate Mathematical Contest in Modeling</li>
-				  <li>The Second Prize, Province Level, Chinese High School Mathematics League, 2018</li>
-				<li>The Second Prize, Province Level, Chinese High School Mathematics League, 2019</li>
-		      </ul>
+              <ul>
+                  <li>Outstanding Graduate Thesis @ ECNU</li>
+                  <li>Excellent Student Scholarship (the first year in my undergraduate journey)</li>
+                  <li>The Third Prize, Province Level, China Undergraduate Mathematical Contest in Modeling</li>
+                  <li>The Second Prize, Province Level, Chinese High School Mathematics League, 2018</li>
+                <li>The Second Prize, Province Level, Chinese High School Mathematics League, 2019</li>
+              </ul>
             </td>
           </tr>
         </tbody></table>
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-
+        
         <hr>
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
             <tr>
             <td style="padding:20px;width:100%;vertical-align:middle">
               <h2>Misc</h2>
-		      <ul>
-			      <li>I used to be an actor @ Yang Zhi Shui Chinese Drama Club, ECNU. Our drama, <a href="https://www.thepaper.cn/newsDetail_forward_19296186">"Online Tragedy" (《线上悲剧》)</a>, won the Best Online Creative Award at The 18th Shanghai College Students Drama Festival. In the play, my role is the male lead, Andrei (安德烈), a Russian revolutionary youth. </li>
-			      <li>During the summer of 2021, I joined the ecology research team from ECNU on multiple field investigations to Zhoushan Island in Zhejiang Province, primarily focusing on studying the distribution of local anteater populations. <a href="https://www.ecnu.edu.cn/info/1094/67863.htm">Finally, this research is published as a paper.</a></li>
-		      </ul>
+              <ul>
+                  <li>I used to be an actor @ Yang Zhi Shui Chinese Drama Club, ECNU. Our drama, <a href="https://www.thepaper.cn/newsDetail_forward_19296186">"Online Tragedy" (《线上悲剧》)</a>, won the Best Online Creative Award at The 18th Shanghai College Students Drama Festival. In the play, my role is the male lead, Andrei (安德烈), a Russian revolutionary youth. </li>
+                  <li>During the summer of 2021, I joined the ecology research team from ECNU on multiple field investigations to Zhoushan Island in Zhejiang Province, primarily focusing on studying the distribution of local anteater populations. <a href="https://www.ecnu.edu.cn/info/1094/67863.htm">Finally, this research is published as a paper.</a></li>
+              </ul>
             </td>
           </tr>
         </tbody></table>
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+        
+      <div id="footer">
+        <div id="footer-text"></div>
+      </div>
+      © Shitian Zhao
+    
+      <div class="container">
+        <div style="display:inline-block;width:600px;">
+          <script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=sBNAoOp0z7WjCjePyIbth7sECqthsXr6e_SQ4G_VBhA&cl=ffffff&w=a"></script>
+        </div>
+      </div>
 
-	  <!--      足迹统计		-->
-	  <div id="footer">
-	    <div id="footer-text"></div>
-	  </div>
-	  © Shitian Zhao
-	
-	  <div class="container">
-	    <div style="display:inline-block;width:600px;">
-	      <script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=sBNAoOp0z7WjCjePyIbth7sECqthsXr6e_SQ4G_VBhA&cl=ffffff&w=a"></script>
-	    </div>
-	  </div>
-
-    </tbody></table>
     <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
       <tr>
         <td style="padding:0px">
